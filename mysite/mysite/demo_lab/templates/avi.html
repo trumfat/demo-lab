@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="icon" type="image/png" href="/static/images/favicon.ico"/>
+<title> Demo Lab </title>
+<style>
+h1 {
+	color: maroon;
+#	margin-left: 40px;
+}
+body {
+	background-color: linen;
+	margin-left: 40px;
+	margin-right: 40px;
+}
+p {
+#	text-indent: 40px;
+}
+a:hover {
+	color: red;
+}
+ul {
+	list-style-type: circle;
+}
+input[type="submit"]: hover {
+	border: 1px solid black;
+	color:black;
+}
+main {
+	min-height: 100%;
+}
+
+footer {
+	position: fixed;
+	bottom: 0;
+	font-style: italic;
+	font-size: 12px;
+	height: 40px;
+}
+img {
+	float: right;
+}
+</style>
+</head>
+
+<body>
+<h1> Welcome to Avi Networks' Demo Lab </h1>
+
+<hr>
+<p style="font-size: 12px"> The vCenter demo system IP address changes frequently. This web page always maintains correct access information. For details about the demo lab setup and credential information, visit  <a href="https://10.10.2.138"> the PM wiki page. </a>  </p>
+<hr>
+<img src="/static/images/django-small.png" width="130" height="180" >
+<h3> vCenter </h3>
+<table>
+	<col width="140">
+	<col width="180">
+	<col width="70">
+	<tr>
+		<td> Avi Controller : </td>
+		<td> <a href="https://{{ ip }}"> https://{{ ip }} </a> </td>
+		<td> Status: </td>
+		<td> {{ health_status }} </td>
+	</tr>
+	<tr>
+		<td> </td>
+		<td> </td>
+		<td> Version: </td>
+		<td> {{ version }} </td>
+</table>
+
+<h3> OpenStack </h3>
+<table>
+	<col width="140">
+	<tr>
+		<td> Avi Controller : </td>
+		<td> <a href="https://10.10.5.81"> https://10.10.5.81 </a> </td>
+	</tr>
+	<tr>
+		<td> OpenStack Cluster : </td>
+		<td> <a href="http://10.10.5.79"> http://10.10.5.79 </a> </td>
+	</tr>
+<table>
+
+<hr>
+<h3> Subscription to E-mail notification</h3>
+
+{{ email_receivers }} 
+
+<form action="/subscribe/" method="get">
+	<p> 
+		E-mail: &nbsp &nbsp &nbsp &nbsp <input type="email" name="email">
+		<input type="submit" name="action" value="subscribe"> 
+		<input type="submit" name="action" value="unsubscribe"> 
+	</p>
+</form>
+
+<hr>
+<h3> Admin Only </h3>
+<form name="IP" action="/update/" onsubmit="return ValidateIP(document.IP.ip)" method="get">
+	<p> 
+		New Avi IP: <input type="text" name="ip">
+		Password: <input type="password" name="passwd">
+		<input type="submit" value="update"> 
+	</p>
+</form>
+<script src="/static/ip-validation.js"></script> 
+<footer>
+This site is in beta stage and over-powered by Django. "The ultimate elegance comes from pure abstraction with humor" - Deukyoon Kang, Sep. 2014.
+</footer>
+
+</body>
+</html>
