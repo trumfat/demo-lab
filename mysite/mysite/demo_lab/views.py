@@ -8,6 +8,7 @@ from mysite.demo_lab.models import Emails
 
 from django.core.mail import EmailMessage
 import requests
+import time
 
 def hello(request):
 	return HttpResponse("Hello World")
@@ -117,4 +118,15 @@ def subscribe(request):
 	html = t.render(Context({"message": message}))
 
 	return HttpResponse(html)
+
+def avi_version(request):
+    r = requests.get("https://10.10.5.81/api/initial-data?format=json", auth=("admin", "avi123"), verify=False)
+    data = r.json()
+    version = str(data['version']['Version']) + ' B' +  str(data['version']['build']) + ', ' + str(data['version']['Date'])
+
+    return HttpResponse(version)
+
+def avi_health(request):
+    time.sleep(0)
+    return HttpResponse("I've a good feeling about this.")
 

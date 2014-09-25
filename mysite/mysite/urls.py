@@ -19,4 +19,6 @@ urlpatterns = patterns('',
 	url(r'^update/$', views.update),
 	url(r'^subscribe/$', views.subscribe),
 	url(r'^hello/$', views.hello),
+	url(r'^api/avi-version/$', views.avi_version),
+	url(r'^api/avi-health/$', views.avi_health),
 )

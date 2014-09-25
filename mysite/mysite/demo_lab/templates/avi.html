@@ -59,7 +59,7 @@ img {
 		<td> Avi Controller : </td>
 		<td> <a href="https://{{ ip }}"> https://{{ ip }} </a> </td>
 		<td> Status: </td>
-		<td> {{ health_status }} </td>
+		<td id="avi_vcenter_health"></td>
 	</tr>
 	<tr>
 		<td> </td>
@@ -107,6 +107,28 @@ img {
 <footer>
 This site is in beta stage and over-powered by Django. "The ultimate elegance comes from pure abstraction with humor" - Deukyoon Kang, Sep. 2014.
 </footer>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script>
+    var myVar = setInterval(
+        function() {
+            avi_health();
+        },
+        10000
+    );
+
+    function avi_health() {
+        $.ajax({
+            url: "api/avi-health/",
+            dataType: "text",
+            timeout:1000
+        }).done(function(text){
+                 document.getElementById("avi_vcenter_health").innerHTML = text;
+        }).fail(function(){
+                 document.getElementById("avi_vcenter_health").innerHTML ="Error";
+        });
+    };
+</script>
 
 </body>
 </html>
